@@ -21,7 +21,21 @@ typedef struct symboltable {
 
 // symbol-table functions
 
+/**
+ *  initialize symboltable
+ *  
+ * @param SymbolTable, address of symboltable
+ * @param initial_capacity, initial_capacity of symboltable
+ * 
+ * @returns, error code
+ * @retval, 0, if success
+ * @retval, -1, if fail
+*/
 char            symboltable_init (symboltable_t *SymbolTable, size_t initial_capacity);
+
+/**
+ *  
+ */
 char            symboltable_destroy (symboltable_t *SymbolTable);
 
 unsigned short  symboltable_hashcode (symboltable_t *SymbolTable, char* symbol);
