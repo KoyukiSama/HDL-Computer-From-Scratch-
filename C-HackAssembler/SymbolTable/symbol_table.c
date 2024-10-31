@@ -1,18 +1,45 @@
 #include "symbol_table.h"
 
-char symboltable_init (symboltable_t *SymbolTable, size_t initial_capacity) {
-    // check if exists
-    if (SymbolTable != NULL) {
-        return 2;
-    }
+symboltable_t* symboltable_init(size_t initial_capacity) {
 
-    // create symboltable
+    // Symbol table
+    symboltable_t* SymbolTable = MallocExit(sizeof(*SymbolTable));
     SymbolTable->capacity = initial_capacity;
     SymbolTable->size = 0;
-    bucket_t** BucketList = Malloc(sizeof(**BucketList) * initial_capacity);
+
+    // Bucket list
+    bucket_t** BucketList = SymbolTable->BucketList = Malloc(sizeof(**BucketList) * initial_capacity);
+    if (BucketList == NULL) { // free symboltable if error
+        free(SymbolTable);
+        exit(EXIT_FAILURE);
+    }
+
+    return SymbolTable;
 }
 
-char symboltable_destroy (symboltable_t *SymbolTable);
+void symboltable_destroy (symboltable_t *SymbolTable) {
+
+    // check if null
+    if (SymbolTable == NULL) return;
+
+    // Bucket list items destroy
+    for (size_t i = 0; i < SymbolTable->capacity; i++) {
+        bucket_t *current = SymbolTable->BucketList[i];
+
+        while (current != NULL) {
+            bucket_t *next = current->next;
+            free(current->symbol);
+            free(current);
+            current = next;
+        }
+    }
+
+    // Bucket list destroy
+    free(SymbolTable->BucketList);
+
+    // Symbol table destroy
+    free(SymbolTable);
+}
 
 unsigned short  symboltable_hashcode (symboltable_t *SymbolTable, char* symbol);
 
@@ -21,9 +48,17 @@ void* symboltable_set (symboltable_t *SymbolTable, char* symbol, unsigned short 
 void* symboltable_get (symboltable_t *SymbolTable, char* symbol);
 
 
-// mallocs
+// malloc wrapper
 
 void* Malloc(size_t size_t) {
+    void *ptr = malloc(size_t);
+    if ( ptr == NULL ) {
+        perror("Malloc error");
+    }
+    return ptr;
+}
+
+void* MallocExit(size_t size_t) {
     void *ptr = malloc(size_t);
     if ( ptr == NULL ) {
         perror("Malloc error");
