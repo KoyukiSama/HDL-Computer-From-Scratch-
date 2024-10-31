@@ -30,7 +30,6 @@ typedef struct symboltable {
  * @returns Error code, char
  * @retval, 0, if success
  * @retval, -1, if fail
- * @retval, -2, if exists
 */
 char            symboltable_init (symboltable_t *SymbolTable, size_t initial_capacity);
 
