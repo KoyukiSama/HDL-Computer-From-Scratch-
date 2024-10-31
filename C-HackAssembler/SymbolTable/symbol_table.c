@@ -41,7 +41,16 @@ void symboltable_destroy (symboltable_t *SymbolTable) {
     free(SymbolTable);
 }
 
-unsigned short  symboltable_hashcode (symboltable_t *SymbolTable, char* symbol);
+unsigned short  symboltable_hashcode (symboltable_t *SymbolTable, const char* symbol) {
+    unsigned long hash = 5381; // starting prime
+    int c;
+
+    while (c = *symbol++) {
+        hash = ((hash << 5) + hash) + c; // hash * 33 + c
+    }
+
+    return (unsigned short)(hash % SymbolTable->capacity);
+}
 
 void* symboltable_set (symboltable_t *SymbolTable, char* symbol, unsigned short value);
 

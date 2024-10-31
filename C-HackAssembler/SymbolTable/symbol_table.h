@@ -47,7 +47,7 @@ void            symboltable_destroy(symboltable_t *SymbolTable);
  * @return Hashcode(symbol), unsigned short
  * @retval, key
  */
-unsigned short  symboltable_hashcode(symboltable_t *SymbolTable, char* symbol);
+unsigned short  symboltable_hashcode(symboltable_t *SymbolTable, const char* symbol);
 
 /**
  *  !set symbol-value pair, in symboltable
