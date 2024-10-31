@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #define LOAD_FACTOR 0.75
 #define GROWTH_FACTOR 2
@@ -14,7 +15,7 @@ typedef struct bucket {
 } bucket_t;
 
 typedef struct symboltable {
-    bucket_t** bucketlist;
+    bucket_t** BucketList;
     size_t size;
     size_t capacity;
 } symboltable_t;
@@ -24,26 +25,18 @@ typedef struct symboltable {
 /**
  *  !initialize symboltable
  *  
- * @param SymbolTable, address
  * @param initial_capacity, size_t
  * 
- * @returns Error code, char
- * @retval, 0, if success
- * @retval, -1, if fail
- * @retval, -2, if exists
+ * @returns symboltable
 */
-char            symboltable_init (symboltable_t *SymbolTable, size_t initial_capacity);
+symboltable_t*  symboltable_init(size_t initial_capacity);
 
 /**
  *  !destroy symboltable
  * 
  * @param SymbolTable, address
- * 
- * @returns Error code, char
- * @retval, 0, if success
- * @retval, -1, if fail
  */
-char            symboltable_destroy (symboltable_t *SymbolTable);
+void            symboltable_destroy(symboltable_t *SymbolTable);
 
 /**
  *  !generate hashcode
@@ -54,7 +47,7 @@ char            symboltable_destroy (symboltable_t *SymbolTable);
  * @return Hashcode(symbol), unsigned short
  * @retval, key
  */
-unsigned short  symboltable_hashcode (symboltable_t *SymbolTable, char* symbol);
+unsigned short  symboltable_hashcode(symboltable_t *SymbolTable, char* symbol);
 
 /**
  *  !set symbol-value pair, in symboltable
@@ -67,7 +60,7 @@ unsigned short  symboltable_hashcode (symboltable_t *SymbolTable, char* symbol);
  * @retval, value, if success, unsigned short
  * @retval, NULL, if fail
  */
-void*           symboltable_set (symboltable_t *SymbolTable, char* symbol, unsigned short value);
+void*           symboltable_set(symboltable_t *SymbolTable, char* symbol, unsigned short value);
 
 /**
  *  !get value at symbol, in symboltable
@@ -79,6 +72,4 @@ void*           symboltable_set (symboltable_t *SymbolTable, char* symbol, unsig
  * @retval, value, if success, unsigned short
  * @retval, NULL, if fail
  */
-void*           symboltable_get (symboltable_t *SymbolTable, char* symbol);
-
-// malloc handling
+void*           symboltable_get(symboltable_t *SymbolTable, char* symbol);
