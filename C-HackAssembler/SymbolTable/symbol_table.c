@@ -1,41 +1,15 @@
 #include "symbol_table.h"
 
-#include <stdlib.h>
-
-#define LOAD_FACTOR 0.75;
-#define GROWTH_FACTOR 2;
-
-// symbol table data structure
-
-typedef struct symboltable {
-    bucket_t** bucketlist;
-    size_t size;
-    size_t capacity;
-} symboltable_t;
-
-typedef struct bucket {
-    char* symbol;
-    int value;
-    struct bucket* next;
-} bucket_t;
-
-// symbol table functions
-
-char    symboltable_init(  
-            symboltable_t *SymbolTable,
-            size_t capacity,
-);
-
-symboltable_destroy() {
-
+char symboltable_init (symboltable_t *SymbolTable, size_t initial_capacity) {
+    if (SymbolTable != NULL) {
+        return 2;
+    }
 }
 
-symboltable_set() {
+char symboltable_destroy (symboltable_t *SymbolTable);
 
-}
+unsigned short  symboltable_hashcode (symboltable_t *SymbolTable, char* symbol);
 
-symboltable_get() {
+void* symboltable_set (symboltable_t *SymbolTable, char* symbol, unsigned short value);
 
-}
-
-// malloc handling
+void* symboltable_get (symboltable_t *SymbolTable, char* symbol);
