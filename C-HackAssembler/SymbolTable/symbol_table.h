@@ -39,17 +39,6 @@ symboltable_t*  symboltable_init(size_t initial_capacity);
 void            symboltable_destroy(symboltable_t *SymbolTable);
 
 /**
- *  !generate hashcode
- * 
- * @param SymbolTable, address
- * @param symbol, string
- * 
- * @return Hashcode(symbol), unsigned short
- * @retval, key
- */
-unsigned short  symboltable_hashcode(symboltable_t *SymbolTable, const char* symbol);
-
-/**
  *  !set symbol-value pair, in symboltable
  * 
  * @param SymbolTable, address
