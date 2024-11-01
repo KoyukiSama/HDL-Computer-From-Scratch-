@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #define LOAD_FACTOR 0.75
 #define GROWTH_FACTOR 2
@@ -46,10 +47,10 @@ void            symboltable_destroy(symboltable_t *SymbolTable);
  * @param value, unsigned short
  * 
  * @return, set value || error
- * @retval, value, if success, unsigned short
- * @retval, NULL, if fail
+ * @retval, 0, if success
+ * @retval, -1, if already exists
  */
-void*           symboltable_set(symboltable_t *SymbolTable, char* symbol, unsigned short value);
+char            symboltable_set(symboltable_t *SymbolTable, const char* symbol, unsigned short value);
 
 /**
  *  !get value at symbol, in symboltable
@@ -61,4 +62,4 @@ void*           symboltable_set(symboltable_t *SymbolTable, char* symbol, unsign
  * @retval, value, if success, unsigned short
  * @retval, NULL, if fail
  */
-void*           symboltable_get(symboltable_t *SymbolTable, char* symbol);
+void*           symboltable_get(symboltable_t *SymbolTable, const char* symbol);
