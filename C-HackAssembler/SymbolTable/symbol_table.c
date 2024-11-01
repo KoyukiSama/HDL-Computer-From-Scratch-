@@ -26,7 +26,7 @@ void symboltable_destroy(symboltable_t *SymbolTable) {
     for (size_t i = 0; i < SymbolTable->capacity; i++) {
         bucket_t *current = SymbolTable->BucketList[i];
 
-        while (current == NULL) {
+        while (current) {
             bucket_t *next = current->next;
             free(current->symbol);              // maybe unneccessary if I don't have to malloc a string
             free(current);
@@ -103,21 +103,26 @@ unsigned short  symboltable_hashcode(symboltable_t *SymbolTable, const char* sym
 }
 
 void symboltable_ensure_capacity(symboltable_t *SymbolTable) {
-    if ( SymbolTable->size > (SymbolTable->capacity * LOAD_FACTOR) ) {
+    if ( SymbolTable->size > SymbolTable->capacity * LOAD_FACTOR ) {
 
         // set new capacity
         size_t capacity_old = SymbolTable->capacity;
         size_t capacity_new = SymbolTable->capacity = SymbolTable->capacity * GROWTH_FACTOR;
         
         // re memory
-        bucket_t** new_list = realloc(SymbolTable->BucketList, capacity_new * sizeof(*new_list));
-        if (new_list == NULL) {
-            perror("Realloc error");
-            exit(EXIT_FAILURE);
+        bucket_t** new_list = Calloc(capacity_new, sizeof(*new_list));
+
+        for (size_t i = 0; i < capacity_old; i++) {
+            bucket_t *currBucket = SymbolTable->BucketList[i];
+            while (currBucket != NULL) {
+                bucket_t *nextBucket = currBucket->next;
+                unsigned short new_key = symboltable_hashcode_capacity(currBucket->symbol, capacity_new);
+                currBucket->next = new_list[new_key];
+                new_list[new_key] = currBucket;
+                currBucket = nextBucket;
+            }
         }
-        for (size_t i = capacity_old; i < capacity_new; i++) { // fake calloc
-            new_list[i] = NULL;
-        }
+        free(SymbolTable->BucketList);
 
         // set 
         SymbolTable->BucketList = new_list;
