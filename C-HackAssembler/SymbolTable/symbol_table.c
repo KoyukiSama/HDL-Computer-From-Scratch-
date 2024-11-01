@@ -75,17 +75,17 @@ char symboltable_set(symboltable_t *SymbolTable, const char* symbol, unsigned sh
     return 0;
 }
 
-void* symboltable_get(symboltable_t *SymbolTable, const char* symbol) {
+char symboltable_get(symboltable_t *SymbolTable, const char* symbol, unsigned short *out_value) {
     bucket_t *currBucket = SymbolTable->BucketList[symboltable_hashcode(SymbolTable, symbol)];
 
     while (currBucket) {
         if (strcmp(currBucket->symbol, symbol) == 0) {
-            return currBucket->value;
+            *out_value = currBucket->value;
+            return 0;
         }
         currBucket = currBucket->next;
     }
-    
-    return NULL;
+    return -1;
 }
 
 
@@ -103,7 +103,7 @@ unsigned short  symboltable_hashcode(symboltable_t *SymbolTable, const char* sym
 }
 
 void symboltable_ensure_capacity(symboltable_t *SymbolTable) {
-    if ( SymbolTable->size > SymbolTable->capacity * LOAD_FACTOR ) {
+    if ( SymbolTable->size > (size_t)(SymbolTable->capacity * LOAD_FACTOR) ) {
 
         // set new capacity
         size_t capacity_old = SymbolTable->capacity;
