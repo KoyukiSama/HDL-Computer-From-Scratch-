@@ -62,4 +62,4 @@ char            symboltable_set(symboltable_t *SymbolTable, const char* symbol, 
  * @retval, value, if success, unsigned short
  * @retval, NULL, if fail
  */
-void*           symboltable_get(symboltable_t *SymbolTable, const char* symbol);
+char           symboltable_get(symboltable_t *SymbolTable, const char* symbol, unsigned short *out_value);

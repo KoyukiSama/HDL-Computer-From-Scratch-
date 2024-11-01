@@ -95,7 +95,7 @@ unsigned short  symboltable_hashcode(symboltable_t *SymbolTable, const char* sym
     unsigned long hash = 5381; // starting prime
     int c;
 
-    while (c = *symbol++) {
+    while ((c = *symbol++)) {
         hash = ((hash << 5) + hash) + c; // hash * 33 + c
     }
 
