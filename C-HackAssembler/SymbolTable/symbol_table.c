@@ -64,7 +64,7 @@ char symboltable_set(symboltable_t *SymbolTable, const char* symbol, unsigned sh
 
     // key not in symbol table, alloc new 
     bucket_t *bucket = CallocExit(1, sizeof(*bucket));
-    bucket->symbol   = symbol;
+    bucket->symbol   = strdup(symbol);
     bucket->value    = value;
     bucket->next     = SymbolTable->BucketList[key];
 
