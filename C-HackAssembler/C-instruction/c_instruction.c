@@ -137,16 +137,17 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
 
 unsigned short translate_C_instruction_bin(symboltable_t* BinaryTable, char* c_instruction) {
     
-    BinaryTable->capacity = 100;
-
     char dest[5] = {0};
     char comp[5] = {0};
     char jump[5] = {0};
 
+    unsigned short bin_c_instruction = 0; // init binary instruction
+
     split_C_instruction(c_instruction, dest, comp, jump); // split the c-instruction
     
-    unsigned short bin_c_instruction = 0;
-    bin_c_instruction += 1;
+    SHIFTBITS_OPCODE_111(bin_c_instruction);
+
+    symboltable_get(BinaryTable, dest, );
 
     return (unsigned short)(8);
 }
