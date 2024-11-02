@@ -1,10 +1,6 @@
 #include "c_instruction.h"
 #include "../SymbolTable/symbol_table.h"
 
-unsigned short translate_Comp_Binary(symboltable_t* BinaryTable, char* strComp) {
-    
-}
-
 symboltable_t* create_C_instruction_table() {
     // initialize BinaryTable
     symboltable_t* BinaryTable = symboltable_init(36);
@@ -59,3 +55,19 @@ symboltable_t* create_C_instruction_table() {
     symboltable_set(BinaryTable, "JLE", "0b110"); // JLE
     symboltable_set(BinaryTable, "JMP", "0b111"); //JMP
 }
+
+void split_C_instruction(char* c_instruction) {
+    // use sliding window to split this up
+}
+
+unsigned short translate_C_instruction_bin(symboltable_t* BinaryTable, char* c_instruction) {
+    
+    // split up the c instruction into 3 strings, comp, dest, jump
+    // translate each string to each binary value and shift the bits with the macros
+    unsigned short bin_c_instruction = 0;
+
+
+}
+
+// you have to initialize the binary table at the start of the 2nd pass
+// else it'll be a waste of CPU
