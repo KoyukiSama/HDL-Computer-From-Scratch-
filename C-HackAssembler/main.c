@@ -3,11 +3,11 @@
 #include <stdio.h>
 
 int main(void) {
-    char c_instruct[] = "M=D+1;null";
+    char c_instruct[] = "MD=D-1;JMP";
 
-    char dest[5] = "";
-    char comp[5] = "";
-    char jump[5] = "";
+    char dest[5] = {0};
+    char comp[5] = {0};
+    char jump[5] = {0};
 
     split_C_instruction(c_instruct, dest, comp, jump);
 

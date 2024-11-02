@@ -2,7 +2,7 @@ CC = gcc
 
 CFLAGS = -g -Wall -Wextra -Werror
 
-TARGET = test_splitter
+TARGET = a.out
 
 SOURCES = main.c ./SymbolTable/symbol_table.c ./C-instruction/c_instruction.c
 
