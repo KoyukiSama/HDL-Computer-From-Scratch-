@@ -2,9 +2,9 @@ CC = gcc
 
 CFLAGS = -g -Wall -Wextra -Werror
 
-TARGET = test_symboltable
+TARGET = test_splitter
 
-SOURCES = main.c ./SymbolTable/symbol_table.c
+SOURCES = main.c ./SymbolTable/symbol_table.c ./C-instruction/c_instruction.c
 
 # Default rule
 all: $(TARGET)
