@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 int main(void) {
-    char c_instruct[] = "MD=D-1;JMP";
+    char c_instruct[] = "D-1";
 
     char dest[5] = {0};
     char comp[5] = {0};

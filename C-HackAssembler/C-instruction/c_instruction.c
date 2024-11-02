@@ -77,21 +77,19 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
         i++;
     } terminatorPos = i; // set '\0'
     i = 0; // reset i
-    printf("equalsPos: %d\n", equalsPos);
-    printf("semiColonPos: %d\n", semiColonPos);
-    printf("terminatorPos: %d\n\n", terminatorPos);
 
     // second pass, assign the fields to dest, comp, jump strings
     if (equalsPos != 0) { // if dest field exists
         j = equalsPos;
         while (i < j) {
             dest[i] = c_instruction[i];
+            printf("I'm in equalspos");
             i++;
         }
         dest[i] = '\0';
         i++;
     } else {
-        dest = "null";
+        dest[0] = 'n'; dest[1] = 'u'; dest[2] = 'l'; dest[3] = 'l';
     }
     if (semiColonPos != 0) { // if jump field exists
         if (equalsPos != 0) {
@@ -118,7 +116,7 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
         }
         jump[z] = '\0';
     } else {
-        jump = "null";
+        jump[0] = 'n'; jump[1] = 'u'; jump[2] = 'l'; jump[3] = 'l';
     }
     if (semiColonPos == 0) { // if no jump field exists
         if (equalsPos != 0) {
@@ -145,9 +143,8 @@ unsigned short translate_C_instruction_bin(symboltable_t* BinaryTable, char* c_i
     char comp[5] = {0};
     char jump[5] = {0};
 
-    split_C_instruction(c_instruction, dest, comp, jump);
-    // split up the c instruction into 3 strings, comp, dest, jump
-    // translate each string to each binary value and shift the bits with the macros
+    split_C_instruction(c_instruction, dest, comp, jump); // split the c-instruction
+    
     unsigned short bin_c_instruction = 0;
     bin_c_instruction += 1;
 
