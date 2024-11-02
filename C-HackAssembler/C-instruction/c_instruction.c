@@ -35,24 +35,24 @@ symboltable_t* create_C_instruction_table() {
     symboltable_set(BinaryTable, "D|M", 85);
 
     // set dest instructions
-    symboltable_set(BinaryTable, "null", "0"); // null
-    symboltable_set(BinaryTable, "M", "1"); // M
-    symboltable_set(BinaryTable, "D", "2"); // D
-    symboltable_set(BinaryTable, "MD", "3"); // MD
-    symboltable_set(BinaryTable, "A", "4"); // A
-    symboltable_set(BinaryTable, "AM", "5"); // AM
-    symboltable_set(BinaryTable, "AD", "6"); // AD
-    symboltable_set(BinaryTable, "AMD", "7"); // AMD
+    symboltable_set(BinaryTable, "null", 0); // null
+    symboltable_set(BinaryTable, "M", 1); // M
+    symboltable_set(BinaryTable, "D", 2); // D
+    symboltable_set(BinaryTable, "MD", 3); // MD
+    symboltable_set(BinaryTable, "A", 4); // A
+    symboltable_set(BinaryTable, "AM", 5); // AM
+    symboltable_set(BinaryTable, "AD", 6); // AD
+    symboltable_set(BinaryTable, "AMD", 7); // AMD
 
     // set jump instructions
-    symboltable_set(BinaryTable, "null", "0"); // null
-    symboltable_set(BinaryTable, "JGT", "1"); // JGT
-    symboltable_set(BinaryTable, "JEQ", "2"); // JEQ
-    symboltable_set(BinaryTable, "JGE", "3"); // JGE
-    symboltable_set(BinaryTable, "JLT", "4"); // JLT
-    symboltable_set(BinaryTable, "JNE", "5"); // JNE
-    symboltable_set(BinaryTable, "JLE", "6"); // JLE
-    symboltable_set(BinaryTable, "JMP", "7"); // JMP
+    symboltable_set(BinaryTable, "null", 0); // null
+    symboltable_set(BinaryTable, "JGT", 1); // JGT
+    symboltable_set(BinaryTable, "JEQ", 2); // JEQ
+    symboltable_set(BinaryTable, "JGE", 3); // JGE
+    symboltable_set(BinaryTable, "JLT", 4); // JLT
+    symboltable_set(BinaryTable, "JNE", 5); // JNE
+    symboltable_set(BinaryTable, "JLE", 6); // JLE
+    symboltable_set(BinaryTable, "JMP", 7); // JMP
 }
 
 // helper function
