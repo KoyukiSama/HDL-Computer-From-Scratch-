@@ -63,3 +63,13 @@ char            symboltable_set(symboltable_t *SymbolTable, const char* symbol, 
  * @retval, -1 if not in table
  */
 char           symboltable_get(symboltable_t *SymbolTable, const char* symbol, unsigned short *out_value);
+
+
+// helper functions 
+
+void symboltable_ensure_capacity(symboltable_t *SymbolTable);
+unsigned short  symboltable_hashcode(symboltable_t *SymbolTable, const char* symbol);
+void* Malloc(size_t size_t);
+void* Calloc(size_t nmemb, size_t size);
+void* CallocExit(size_t nmemb, size_t size);
+void* MallocExit(size_t size_t);

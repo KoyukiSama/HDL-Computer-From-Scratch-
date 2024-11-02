@@ -116,7 +116,7 @@ void symboltable_ensure_capacity(symboltable_t *SymbolTable) {
             bucket_t *currBucket = SymbolTable->BucketList[i];
             while (currBucket != NULL) {
                 bucket_t *nextBucket = currBucket->next;
-                unsigned short new_key = symboltable_hashcode_capacity(currBucket->symbol, capacity_new);
+                unsigned short new_key = symboltable_hashcode(SymbolTable, currBucket->symbol);
                 currBucket->next = new_list[new_key];
                 new_list[new_key] = currBucket;
                 currBucket = nextBucket;
