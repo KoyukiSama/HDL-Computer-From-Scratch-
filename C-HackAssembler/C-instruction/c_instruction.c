@@ -88,7 +88,7 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
             dest[i] = c_instruction[i];
             i++;
         }
-        dest[i] = 'z';
+        dest[i] = '\0';
         i++;
     } else {
         dest = "null";
@@ -106,7 +106,7 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
             i++;
             z++;
         }
-        comp[z] = 'z';
+        comp[z] = '\0';
         i++;
 
         z = 0;
@@ -116,7 +116,7 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
             i++;
             z++;
         }
-        jump[z] = 'z';
+        jump[z] = '\0';
     } else {
         jump = "null";
     }
@@ -133,7 +133,7 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
             i++;
             z++;
         }
-        comp[i] = 'z';
+        comp[i] = '\0';
     }
 }
 
