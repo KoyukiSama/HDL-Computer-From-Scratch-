@@ -39,4 +39,23 @@ symboltable_t* create_C_instruction_table() {
     symboltable_set(BinaryTable, "D|A", 0b0010101); // D|A
     symboltable_set(BinaryTable, "D|M", 0b1010101);
 
+    // set dest instructions
+    symboltable_set(BinaryTable, "null", "0b000"); // null
+    symboltable_set(BinaryTable, "M", "0b001"); // M
+    symboltable_set(BinaryTable, "D", "0b010"); // D
+    symboltable_set(BinaryTable, "MD", "0b011"); // MD
+    symboltable_set(BinaryTable, "A", "0b100"); // A
+    symboltable_set(BinaryTable, "AM", "0b101"); // AM
+    symboltable_set(BinaryTable, "AD", "0b110"); // AD
+    symboltable_set(BinaryTable, "AMD", "0b111"); // AMD
+
+    // set jump instructions
+    symboltable_set(BinaryTable, "null", "0b000"); // null
+    symboltable_set(BinaryTable, "JGT", "0b001"); // JGT
+    symboltable_set(BinaryTable, "JEQ", "0b010"); // JEQ
+    symboltable_set(BinaryTable, "JGE", "0b011"); // JGE
+    symboltable_set(BinaryTable, "JLT", "0b100"); // JLT
+    symboltable_set(BinaryTable, "JNE", "0b101"); // JNE
+    symboltable_set(BinaryTable, "JLE", "0b110"); // JLE
+    symboltable_set(BinaryTable, "JMP", "0b111"); //JMP
 }
