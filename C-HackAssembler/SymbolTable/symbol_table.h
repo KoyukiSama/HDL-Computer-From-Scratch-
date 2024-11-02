@@ -46,7 +46,7 @@ void            symboltable_destroy(symboltable_t *SymbolTable);
  * @param symbol, string
  * @param value, unsigned short
  * 
- * @return, set value || error
+ * @return, exist or success
  * @retval, 0, if success
  * @retval, -1, if already exists
  */
@@ -58,8 +58,8 @@ char            symboltable_set(symboltable_t *SymbolTable, const char* symbol, 
  * @param SymbolTable, address
  * @param symbol, string
  * 
- * @return, value at symbol || error
- * @retval, value, if success, unsigned short
- * @retval, NULL, if fail
+ * @return, error code
+ * @retval, 0 if exists
+ * @retval, -1 if not in table
  */
 char           symboltable_get(symboltable_t *SymbolTable, const char* symbol, unsigned short *out_value);
