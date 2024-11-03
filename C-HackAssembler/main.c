@@ -1,13 +1,15 @@
 #include "./SymbolTable/symbol_table.h"
-#include "./C-instruction/c_instruction.h"
+#include "./Instructions/instructions.h"
 #include <stdio.h>
 
 int main(void) {
     symboltable_t *BinaryTable = C_binarytable_create();
 
-    char* c_instruction = "MD=D+M";
+    char* instruction = "@34";
     char binary_string[17];
-    C_instruction_to_bin(BinaryTable, c_instruction, binary_string);
+    instruction_to_bin(BinaryTable, instruction, binary_string);
 
-    printf("c_instruction: %s\nbinary_string: %s", c_instruction, binary_string);
+    printf("instruction: %s\nbinary_string: %s", instruction, binary_string);
+
+    symboltable_destroy(BinaryTable);
 }

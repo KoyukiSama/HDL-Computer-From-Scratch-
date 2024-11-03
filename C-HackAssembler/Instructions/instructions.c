@@ -1,4 +1,4 @@
-#include "c_instruction.h"
+#include "instructions.h"
 
 symboltable_t* C_binarytable_create() {
     // initialize BinaryTable
@@ -146,7 +146,7 @@ void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char*
     
     // split the c-instruction
     C_instruction_split(c_instruction, dest, comp, jump); 
-    printf("dest: %s\ncomp: %s\njump: %s\n", dest, comp, jump);
+    // printf("dest: %s\ncomp: %s\njump: %s\n", dest, comp, jump); // debug statement
 
     // translate string instructions to binary instructions
     unsigned short translated_bits_comp; 
@@ -167,6 +167,34 @@ void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char*
     }
     c_instruction_binary_string[16] = '\0';
     
+    return;
+}
+
+void A_instruction_to_bin(char* a_instruction, char* a_instruction_binary_string) {
+    
+    unsigned short a_instruction_binary = 0;
+    a_instruction++; // will start after @
+
+    while (*a_instruction) {
+        a_instruction_binary = a_instruction_binary * 10 + *a_instruction - '0';
+        a_instruction++;
+    }
+
+    for (int i = 15, j = 0; i>=0; i--, j++) {
+        a_instruction_binary_string[j] = (a_instruction_binary & (1U << i)) ? '1' : '0';
+    }
+
+    a_instruction_binary_string[16] = '\0';
+
+    return;
+}
+
+void instruction_to_bin(symboltable_t* BinaryTable, char* instruction, char* instruction_binary_string) {
+    if (instruction[0] == '@') {
+        A_instruction_to_bin(instruction, instruction_binary_string);
+    } else {
+        C_instruction_to_bin(BinaryTable, instruction, instruction_binary_string);
+    }
 
     return;
 }

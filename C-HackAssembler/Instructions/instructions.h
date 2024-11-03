@@ -14,3 +14,6 @@ symboltable_t* C_binarytable_create();
 void C_instruction_split(char* c_instruction, char* dest, char* comp, char* jump);
 
 void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char* c_instruction_binary_string);
+void A_instruction_to_bin(char* a_instruction, char* a_instruction_binary_string);
+
+void instruction_to_bin(symboltable_t* BinaryTable, char* instruction, char* instruction_binary_string);

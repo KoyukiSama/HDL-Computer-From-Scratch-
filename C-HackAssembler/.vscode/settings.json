@@ -12,6 +12,8 @@
         "tuple": "c",
         "type_traits": "c",
         "utility": "c",
-        "c_instruction.h": "c"
+        "c_instruction.h": "c",
+        "stdio.h": "c",
+        "instructions.h": "c"
     }
 }
