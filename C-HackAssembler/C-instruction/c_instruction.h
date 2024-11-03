@@ -30,7 +30,7 @@ typedef struct binarytable {
  * 
  * @returns symboltable
 */
-binarytable_t*  binarytable_init(size_t initial_capacity);
+binarytable_t*  binarytable_init();
 
 /**
  *  !destroy symboltable
@@ -50,7 +50,7 @@ void            binarytable_destroy(binarytable_t *BinaryTable);
  * @retval, 0, if success
  * @retval, -1, if already exists
  */
-char            binarytable_set(binarytable_t *BinaryTable, const char* instruction_string, unsigned short instruction_binary);
+char            binarytable_set(binarytable_t *BinaryTable, const char* instruction_string, char* instruction_binary);
 
 /**
  *  !get value at symbol, in symboltable
@@ -62,13 +62,13 @@ char            binarytable_set(binarytable_t *BinaryTable, const char* instruct
  * @retval, 0 if exists
  * @retval, -1 if not in table
  */
-char           binarytable_get(binarytable_t *BinaryTable, const char* symbol, unsigned short *out_value);
+char           binarytable_get(binarytable_t *BinaryTable, const char* instruction_string, char* instruction_binary);
 
 
 // helper functions 
 
 void binarytable_ensure_capacity(binarytable_t *BinaryTable);
-unsigned short  binarytable_hashcode(binarytable_t *BinaryTable, const char* symbol);
+unsigned short  binarytable_hashcode(binarytable_t *BinaryTable, const char* instruction_string);
 void* Malloc(size_t size_t);
 void* Calloc(size_t nmemb, size_t size);
 void* CallocExit(size_t nmemb, size_t size);
