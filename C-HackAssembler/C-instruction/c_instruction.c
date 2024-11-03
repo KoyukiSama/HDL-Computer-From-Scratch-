@@ -135,7 +135,7 @@ void C_instruction_split(char* c_instruction, char* dest, char* comp, char* jump
     }
 }
 
-unsigned short C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction) {
+char* C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction) {
     
     char dest[5] = {0};
     char comp[5] = {0};
@@ -144,6 +144,9 @@ unsigned short C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruct
     // init binary instruction
     unsigned short bin_c_instruction = 0; 
     
+    // split the c-instruction
+    split_C_instruction(c_instruction, dest, comp, jump); 
+
     // translate string instructions to binary instructions
     unsigned short translated_comp_bits; 
     unsigned short translated_dest_bits;
@@ -151,9 +154,6 @@ unsigned short C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruct
     symboltable_get(BinaryTable, comp, &translated_comp_bits);
     symboltable_get(BinaryTable, dest, &translated_dest_bits);
     symboltable_get(BinaryTable, jump, &translated_jump_bits);
-    
-    // split the c-instruction
-    split_C_instruction(c_instruction, dest, comp, jump); 
     
     // shift bits into one binary number
     bin_c_instruction = SHIFTBITS_OPCODE_111(bin_c_instruction);
