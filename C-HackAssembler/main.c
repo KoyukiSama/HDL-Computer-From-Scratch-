@@ -3,9 +3,9 @@
 #include <stdio.h>
 
 int main(void) {
-    symboltable_t *BinaryTable = create_C_instruction_table();
+    symboltable_t *BinaryTable = C_binarytable_create();
 
-    unsigned short dec_c_instruction = translate_C_instruction_bin(BinaryTable, "MD=D+M;JMP");
+    char* c_instruction = "MD=D+M;JMP";
 
-    printf("decimal: %d", dec_c_instruction);
+    C_instruction_to_bin(BinaryTable, c_instruction);
 }

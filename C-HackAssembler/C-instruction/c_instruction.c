@@ -135,38 +135,41 @@ void C_instruction_split(char* c_instruction, char* dest, char* comp, char* jump
     }
 }
 
-char* C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction) {
+void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char* c_instruction_binary_string) {
     
     char dest[5] = {0};
     char comp[5] = {0};
     char jump[5] = {0};
     
     // init binary instruction
-    unsigned short bin_c_instruction = 0; 
+    unsigned short c_instruction_binary = 0; 
     
     // split the c-instruction
-    split_C_instruction(c_instruction, dest, comp, jump); 
+    C_instruction_split(c_instruction, dest, comp, jump); 
 
     // translate string instructions to binary instructions
-    unsigned short translated_comp_bits; 
-    unsigned short translated_dest_bits;
-    unsigned short translated_jump_bits;
-    symboltable_get(BinaryTable, comp, &translated_comp_bits);
-    symboltable_get(BinaryTable, dest, &translated_dest_bits);
-    symboltable_get(BinaryTable, jump, &translated_jump_bits);
+    unsigned short translated_bits_comp; 
+    unsigned short translated_bits_dest;
+    unsigned short translated_bits_jump;
+    symboltable_get(BinaryTable, comp, &translated_bits_comp);
+    symboltable_get(BinaryTable, dest, &translated_bits_dest);
+    symboltable_get(BinaryTable, jump, &translated_bits_jump);
     
     // shift bits into one binary number
-    bin_c_instruction = SHIFTBITS_OPCODE_111(bin_c_instruction);
-    bin_c_instruction = SHIFTBITS_COMPUTATION(bin_c_instruction, translated_comp_bits); // comp bits
-    bin_c_instruction = SHIFTBITS_DEST(bin_c_instruction, translated_dest_bits); // dest bits
-    bin_c_instruction = SHIFTBITS_JUMP(bin_c_instruction, translated_jump_bits); // jump bits
+    c_instruction_binary = SHIFTBITS_OPCODE_111(c_instruction_binary);
+    c_instruction_binary = SHIFTBITS_COMPUTATION(c_instruction_binary, translated_bits_comp); // comp bits
+    c_instruction_binary = SHIFTBITS_DEST(c_instruction_binary, translated_bits_dest); // dest bits
+    c_instruction_binary = SHIFTBITS_JUMP(c_instruction_binary, translated_bits_jump); // jump bits
 
-    for (int i = 15; i>=0; i--) {
-        putchar((bin_c_instruction & (1U << i)) ? '1' : '0');
+    char c_instruction_binary_string[17];
+
+    for (int i = 15, j = 0; i>=0; i--, j++) {
+        c_instruction_binary_string[j] = (c_instruction_binary & (1U << i)) ? '1' : '0';
     }
-    putchar('\n');
+    c_instruction_binary_string[16] = '\0';
+    
 
-    return bin_c_instruction;
+    return;
 }
 
 // you have to initialize the binary table at the start of the 2nd pass
