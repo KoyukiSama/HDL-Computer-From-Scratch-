@@ -1,6 +1,6 @@
 #include "c_instruction.h"
 
-symboltable_t* create_C_instruction_table() {
+symboltable_t* C_binarytable_create() {
     // initialize BinaryTable
     symboltable_t* BinaryTable = symboltable_init(36);
 
@@ -58,7 +58,7 @@ symboltable_t* create_C_instruction_table() {
 }
 
 // helper function
-void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump) {
+void C_instruction_split(char* c_instruction, char* dest, char* comp, char* jump) {
 
     unsigned char i = 0;
     unsigned char j = 0;
@@ -135,7 +135,7 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
     }
 }
 
-unsigned short translate_C_instruction_bin(symboltable_t* BinaryTable, char* c_instruction) {
+unsigned short C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction) {
     
     char dest[5] = {0};
     char comp[5] = {0};

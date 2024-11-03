@@ -9,8 +9,8 @@
 #define SHIFTBITS_JUMP(bin_c_instruction, new_bits) (unsigned short)((bin_c_instruction << 3) | (new_bits))
 
 
-symboltable_t* create_C_instruction_table();
+symboltable_t* C_binarytable_create();
 
-void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump);
+void C_instruction_split(char* c_instruction, char* dest, char* comp, char* jump);
 
-unsigned short translate_C_instruction_bin(symboltable_t* BinaryTable, char* c_instruction);
+unsigned short C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction);
