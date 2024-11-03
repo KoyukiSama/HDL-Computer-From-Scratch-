@@ -156,17 +156,17 @@ unsigned short translate_C_instruction_bin(symboltable_t* BinaryTable, char* c_i
     split_C_instruction(c_instruction, dest, comp, jump); 
     
     // shift bits into one binary number
-    SHIFTBITS_OPCODE_111(bin_c_instruction);
-    SHIFTBITS_COMPUTATION(bin_c_instruction, translated_comp_bits); // comp bits
-    SHIFTBITS_DEST(bin_c_instruction, translated_dest_bits); // dest bits
-    SHIFTBITS_JUMP(bin_c_instruction, translated_jump_bits); // jump bits
+    bin_c_instruction = SHIFTBITS_OPCODE_111(bin_c_instruction);
+    bin_c_instruction = SHIFTBITS_COMPUTATION(bin_c_instruction, translated_comp_bits); // comp bits
+    bin_c_instruction = SHIFTBITS_DEST(bin_c_instruction, translated_dest_bits); // dest bits
+    bin_c_instruction = SHIFTBITS_JUMP(bin_c_instruction, translated_jump_bits); // jump bits
 
     for (int i = 15; i>=0; i--) {
         putchar((bin_c_instruction & (1U << i)) ? '1' : '0');
     }
-    putchar("\n");
+    putchar('\n');
 
-    return (unsigned short)(8);
+    return bin_c_instruction;
 }
 
 // you have to initialize the binary table at the start of the 2nd pass
