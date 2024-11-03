@@ -1,58 +1,58 @@
 #include "c_instruction.h"
 
-binarytable_t* create_C_instruction_table() {
+symboltable_t* create_C_instruction_table() {
     // initialize BinaryTable
-    binarytable_t* BinaryTable = binarytable_init();
+    symboltable_t* BinaryTable = symboltable_init(36);
 
     // set comp instructions
-    binarytable_set(BinaryTable, "0", "0101010"); // 0
-    binarytable_set(BinaryTable, "1", "0111111"); // 1
-    binarytable_set(BinaryTable, "-1", "0111010"); // -1
-    binarytable_set(BinaryTable, "D", "0001100"); // D
-    binarytable_set(BinaryTable, "A", "0110000");
-    binarytable_set(BinaryTable, "M", "1110000");
-    binarytable_set(BinaryTable, "!D", "0001101"); // !D
-    binarytable_set(BinaryTable, "!A", "0110001");
-    binarytable_set(BinaryTable, "!M", "1110001");
-    binarytable_set(BinaryTable, "-D", "0001111"); // -D
-    binarytable_set(BinaryTable, "-A", "0110011");
-    binarytable_set(BinaryTable, "-M", "1110011");
-    binarytable_set(BinaryTable, "D+1", "0011111"); // D+1
-    binarytable_set(BinaryTable, "A+1", "0110111");
-    binarytable_set(BinaryTable, "M+1", "1110111");
-    binarytable_set(BinaryTable, "D-1", "0001110"); // D-1
-    binarytable_set(BinaryTable, "A-1", "0110010");
-    binarytable_set(BinaryTable, "M-1", "1110010");
-    binarytable_set(BinaryTable, "D+A", "0000010"); // D+A
-    binarytable_set(BinaryTable, "D+M", "1000010");
-    binarytable_set(BinaryTable, "D-A", "0010011"); // D-A
-    binarytable_set(BinaryTable, "D-M", "1010011");
-    binarytable_set(BinaryTable, "A-D", "0000111"); // A-D
-    binarytable_set(BinaryTable, "M-D", "1000111");
-    binarytable_set(BinaryTable, "D&A", "0000000"); // D&A
-    binarytable_set(BinaryTable, "D&M", "1000000");
-    binarytable_set(BinaryTable, "D|A", "0010101"); // D|A
-    binarytable_set(BinaryTable, "D|M", "1010101");
+    symboltable_set(BinaryTable, "0", 21); // 0
+    symboltable_set(BinaryTable, "1", 63); // 1
+    symboltable_set(BinaryTable, "-1", 58); // -1
+    symboltable_set(BinaryTable, "D", 12); // D
+    symboltable_set(BinaryTable, "A", 48);
+    symboltable_set(BinaryTable, "M", 112);
+    symboltable_set(BinaryTable, "!D", 13); // !D
+    symboltable_set(BinaryTable, "!A", 49);
+    symboltable_set(BinaryTable, "!M", 113);
+    symboltable_set(BinaryTable, "-D", 15); // -D
+    symboltable_set(BinaryTable, "-A", 51);
+    symboltable_set(BinaryTable, "-M", 115);
+    symboltable_set(BinaryTable, "D+1", 31); // D+1
+    symboltable_set(BinaryTable, "A+1", 55);
+    symboltable_set(BinaryTable, "M+1", 119);
+    symboltable_set(BinaryTable, "D-1", 14); // D-1
+    symboltable_set(BinaryTable, "A-1", 50);
+    symboltable_set(BinaryTable, "M-1", 114);
+    symboltable_set(BinaryTable, "D+A", 2); // D+A
+    symboltable_set(BinaryTable, "D+M", 66);
+    symboltable_set(BinaryTable, "D-A", 19); // D-A
+    symboltable_set(BinaryTable, "D-M", 83);
+    symboltable_set(BinaryTable, "A-D", 7); // A-D
+    symboltable_set(BinaryTable, "M-D", 71);
+    symboltable_set(BinaryTable, "D&A", 0); // D&A
+    symboltable_set(BinaryTable, "D&M", 64);
+    symboltable_set(BinaryTable, "D|A", 21); // D|A
+    symboltable_set(BinaryTable, "D|M", 85);
 
     // set dest instructions
-    binarytable_set(BinaryTable, "null", "000"); // null
-    binarytable_set(BinaryTable, "M", "001"); // M
-    binarytable_set(BinaryTable, "D", "010"); // D
-    binarytable_set(BinaryTable, "MD", "011"); // MD
-    binarytable_set(BinaryTable, "A", "100"); // A
-    binarytable_set(BinaryTable, "AM", "101"); // AM
-    binarytable_set(BinaryTable, "AD", "110"); // AD
-    binarytable_set(BinaryTable, "AMD", "111"); // AMD
+    symboltable_set(BinaryTable, "null", 0); // null
+    symboltable_set(BinaryTable, "M", 1); // M
+    symboltable_set(BinaryTable, "D", 2); // D
+    symboltable_set(BinaryTable, "MD", 3); // MD
+    symboltable_set(BinaryTable, "A", 4); // A
+    symboltable_set(BinaryTable, "AM", 5); // AM
+    symboltable_set(BinaryTable, "AD", 6); // AD
+    symboltable_set(BinaryTable, "AMD", 7); // AMD
 
     // set jump instructions
-    binarytable_set(BinaryTable, "null", "000"); // null
-    binarytable_set(BinaryTable, "JGT", "001"); // JGT
-    binarytable_set(BinaryTable, "JEQ", "010"); // JEQ
-    binarytable_set(BinaryTable, "JGE", "011"); // JGE
-    binarytable_set(BinaryTable, "JLT", "100"); // JLT
-    binarytable_set(BinaryTable, "JNE", "101"); // JNE
-    binarytable_set(BinaryTable, "JLE", "110"); // JLE
-    binarytable_set(BinaryTable, "JMP", "111"); // JMP
+    symboltable_set(BinaryTable, "null", 0); // null
+    symboltable_set(BinaryTable, "JGT", 1); // JGT
+    symboltable_set(BinaryTable, "JEQ", 2); // JEQ
+    symboltable_set(BinaryTable, "JGE", 3); // JGE
+    symboltable_set(BinaryTable, "JLT", 4); // JLT
+    symboltable_set(BinaryTable, "JNE", 5); // JNE
+    symboltable_set(BinaryTable, "JLE", 6); // JLE
+    symboltable_set(BinaryTable, "JMP", 7); // JMP
 
     return BinaryTable;
 }
@@ -135,7 +135,7 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
     }
 }
 
-unsigned short translate_C_instruction_bin(binarytable_t* BinaryTable, char* c_instruction) {
+unsigned short translate_C_instruction_bin(symboltable_t* BinaryTable, char* c_instruction) {
     
     char dest[5] = {0};
     char comp[5] = {0};
@@ -148,9 +148,9 @@ unsigned short translate_C_instruction_bin(binarytable_t* BinaryTable, char* c_i
     unsigned short translated_comp_bits; 
     unsigned short translated_dest_bits;
     unsigned short translated_jump_bits;
-    binarytable_get(BinaryTable, comp, &translated_comp_bits);
-    binarytable_get(BinaryTable, dest, &translated_dest_bits);
-    binarytable_get(BinaryTable, jump, &translated_jump_bits);
+    symboltable_get(BinaryTable, comp, &translated_comp_bits);
+    symboltable_get(BinaryTable, dest, &translated_dest_bits);
+    symboltable_get(BinaryTable, jump, &translated_jump_bits);
     
     // split the c-instruction
     split_C_instruction(c_instruction, dest, comp, jump); 

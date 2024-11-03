@@ -4,7 +4,7 @@ binarytable_t* binarytable_init() {
 
     // instruction_string table
     binarytable_t* BinaryTable = MallocExit(sizeof(*BinaryTable));
-    BinaryTable->capacity = 36; // memory of binary table
+    BinaryTable->capacity = 35;
     BinaryTable->size     = 0;
 
     // Bucket list
@@ -17,7 +17,7 @@ binarytable_t* binarytable_init() {
     return BinaryTable;
 }
 
-void binarytable_destroy(binarytable_t *BinaryTable) {
+void BinaryTable_destroy(binarytable_t *BinaryTable) {
 
     // check if null
     if (BinaryTable == NULL) return;
