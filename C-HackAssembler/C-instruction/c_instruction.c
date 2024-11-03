@@ -115,7 +115,7 @@ void C_instruction_split(char* c_instruction, char* dest, char* comp, char* jump
         }
         jump[z] = '\0';
     } else {
-        jump[0] = 'n'; jump[1] = 'u'; jump[2] = 'l'; jump[3] = 'l'; jump[3] = '\0';
+        jump[0] = 'n'; jump[1] = 'u'; jump[2] = 'l'; jump[3] = 'l'; jump[4] = '\0';
     }
     if (semiColonPos == 0) { // if no jump field exists
         if (equalsPos != 0) {
@@ -146,6 +146,7 @@ void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char*
     
     // split the c-instruction
     C_instruction_split(c_instruction, dest, comp, jump); 
+    printf("dest: %s\ncomp: %s\njump: %s\n", dest, comp, jump);
 
     // translate string instructions to binary instructions
     unsigned short translated_bits_comp; 
@@ -160,8 +161,6 @@ void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char*
     c_instruction_binary = SHIFTBITS_COMPUTATION(c_instruction_binary, translated_bits_comp); // comp bits
     c_instruction_binary = SHIFTBITS_DEST(c_instruction_binary, translated_bits_dest); // dest bits
     c_instruction_binary = SHIFTBITS_JUMP(c_instruction_binary, translated_bits_jump); // jump bits
-
-    char c_instruction_binary_string[17];
 
     for (int i = 15, j = 0; i>=0; i--, j++) {
         c_instruction_binary_string[j] = (c_instruction_binary & (1U << i)) ? '1' : '0';
