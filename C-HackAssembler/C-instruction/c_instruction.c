@@ -83,12 +83,13 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
         j = equalsPos;
         while (i < j) {
             dest[i] = c_instruction[i];
+            printf("I'm in equalspos");
             i++;
         }
         dest[i] = '\0';
         i++;
     } else {
-        dest[0] = 'n'; dest[1] = 'u'; dest[2] = 'l'; dest[3] = 'l'; dest[4] = '\0';
+        dest[0] = 'n'; dest[1] = 'u'; dest[2] = 'l'; dest[3] = 'l';
     }
     if (semiColonPos != 0) { // if jump field exists
         if (equalsPos != 0) {
@@ -115,7 +116,7 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
         }
         jump[z] = '\0';
     } else {
-        jump[0] = 'n'; jump[1] = 'u'; jump[2] = 'l'; jump[3] = 'l'; jump[4] = '\0';
+        jump[0] = 'n'; jump[1] = 'u'; jump[2] = 'l'; jump[3] = 'l';
     }
     if (semiColonPos == 0) { // if no jump field exists
         if (equalsPos != 0) {
