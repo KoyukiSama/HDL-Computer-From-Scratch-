@@ -1,17 +1,6 @@
 {
     "files.associations": {
-        "symbol_table.h": "c",
-        "charconv": "c",
-        "chrono": "c",
-        "optional": "c",
-        "format": "c",
-        "ratio": "c",
-        "system_error": "c",
-        "array": "c",
-        "functional": "c",
-        "tuple": "c",
-        "type_traits": "c",
-        "utility": "c",
-        "c_instruction.h": "c"
+        "c_instruction.h": "c",
+        "symbol_table.h": "c"
     }
 }

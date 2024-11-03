@@ -42,7 +42,7 @@ void binarytable_destroy(binarytable_t *BinaryTable) {
 }
 
 
-char binarytable_set(binarytable_t *BinaryTable, const char* instruction_string, unsigned short instruction_binary) {
+char binarytable_set(binarytable_t *BinaryTable, const char* instruction_string, char* instruction_binary) {
     
     // get hashkey
     unsigned short key = binarytable_hashcode(BinaryTable, instruction_string);
@@ -72,12 +72,12 @@ char binarytable_set(binarytable_t *BinaryTable, const char* instruction_string,
     return 0;
 }
 
-char binarytable_get(binarytable_t *BinaryTable, const char* instruction_string, unsigned short *out_instruction_binary) {
+char binarytable_get(binarytable_t *BinaryTable, const char* instruction_string, char *out_instruction_binary) {
     bucket_t *currBucket = BinaryTable->BucketList[binarytable_hashcode(BinaryTable, instruction_string)];
 
     while (currBucket) {
         if (strcmp(currBucket->instruction_string, instruction_string) == 0) {
-            *out_instruction_binary = currBucket->instruction_binary;
+            *out_instruction_binary = strdup(currBucket->instruction_binary);
             return 0;
         }
         currBucket = currBucket->next;

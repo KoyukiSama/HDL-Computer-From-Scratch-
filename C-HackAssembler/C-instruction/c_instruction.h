@@ -67,7 +67,6 @@ char           binarytable_get(binarytable_t *BinaryTable, const char* instructi
 
 // helper functions 
 
-void binarytable_ensure_capacity(binarytable_t *BinaryTable);
 unsigned short  binarytable_hashcode(binarytable_t *BinaryTable, const char* instruction_string);
 void* Malloc(size_t size_t);
 void* Calloc(size_t nmemb, size_t size);
@@ -79,4 +78,4 @@ binarytable_t* binarytable_create();
 
 void C_instruction_split(char* c_instruction, char* dest, char* comp, char* jump);
 
-unsigned short C_instruction_bin_translate(binarytable_t* BinaryTable, char* c_instruction);
+char* C_instruction_to_bin(binarytable_t* BinaryTable, char* c_instruction);
