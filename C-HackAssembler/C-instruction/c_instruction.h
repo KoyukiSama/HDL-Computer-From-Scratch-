@@ -1,16 +1,82 @@
 #pragma once
 
-#include "../SymbolTable/symbol_table.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-// C-instruction shift MACRO
-#define SHIFTBITS_OPCODE_111(bin_c_instruction) ((unsigned short)(bin_c_instruction) | (111))
-#define SHIFTBITS_COMPUTATION(bin_c_instruction, new_bits) (unsigned short)((bin_c_instruction << 7) | (new_bits))
-#define SHIFTBITS_DEST(bin_c_instruction, new_bits) (unsigned short)((bin_c_instruction << 3) | (new_bits))
-#define SHIFTBITS_JUMP(bin_c_instruction, new_bits) (unsigned short)((bin_c_instruction << 3) | (new_bits))
+#define LOAD_FACTOR 0.75
+#define GROWTH_FACTOR 2
+
+// binary-table data structure
+
+typedef struct bucket {
+    char* instruction_string;
+    char* instruction_binary;
+    struct bucket* next;
+} bucket_t;
+
+typedef struct binarytable {
+    bucket_t** BucketList;
+    size_t size;
+    size_t capacity;
+} binarytable_t;
+
+// symbol-table functions
+
+/**
+ *  !initialize symboltable
+ *  
+ * @param initial_capacity, size_t
+ * 
+ * @returns symboltable
+*/
+binarytable_t*  binarytable_init(size_t initial_capacity);
+
+/**
+ *  !destroy symboltable
+ * 
+ * @param SymbolTable, address
+ */
+void            binarytable_destroy(binarytable_t *BinaryTable);
+
+/**
+ *  !set symbol-value pair, in symboltable
+ * 
+ * @param SymbolTable, address
+ * @param symbol, string
+ * @param value, unsigned short
+ * 
+ * @return, exist or success
+ * @retval, 0, if success
+ * @retval, -1, if already exists
+ */
+char            binarytable_set(binarytable_t *BinaryTable, const char* instruction_string, unsigned short instruction_binary);
+
+/**
+ *  !get value at symbol, in symboltable
+ * 
+ * @param SymbolTable, address
+ * @param symbol, string
+ * 
+ * @return, error code
+ * @retval, 0 if exists
+ * @retval, -1 if not in table
+ */
+char           binarytable_get(binarytable_t *BinaryTable, const char* symbol, unsigned short *out_value);
 
 
-symboltable_t* create_C_instruction_table();
+// helper functions 
 
-void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump);
+void binarytable_ensure_capacity(binarytable_t *BinaryTable);
+unsigned short  binarytable_hashcode(binarytable_t *BinaryTable, const char* symbol);
+void* Malloc(size_t size_t);
+void* Calloc(size_t nmemb, size_t size);
+void* CallocExit(size_t nmemb, size_t size);
+void* MallocExit(size_t size_t);
 
-unsigned short translate_C_instruction_bin(symboltable_t* BinaryTable, char* c_instruction);
+
+binarytable_t* binarytable_create();
+
+void C_instruction_split(char* c_instruction, char* dest, char* comp, char* jump);
+
+unsigned short C_instruction_bin_translate(binarytable_t* BinaryTable, char* c_instruction);
