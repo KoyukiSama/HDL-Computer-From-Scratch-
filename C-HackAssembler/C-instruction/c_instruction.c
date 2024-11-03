@@ -124,14 +124,13 @@ void split_C_instruction(char* c_instruction, char* dest, char* comp, char* jump
             i = 0;
         }
 
-        z = 0;
         j = terminatorPos;
         while (i < j) {
             comp[z] = c_instruction[i];
             i++;
             z++;
         }
-        comp[z] = '\0';
+        comp[i] = '\0';
     }
 }
 
