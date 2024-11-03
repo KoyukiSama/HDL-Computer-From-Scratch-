@@ -140,14 +140,31 @@ unsigned short translate_C_instruction_bin(symboltable_t* BinaryTable, char* c_i
     char dest[5] = {0};
     char comp[5] = {0};
     char jump[5] = {0};
-
-    unsigned short bin_c_instruction = 0; // init binary instruction
-
-    split_C_instruction(c_instruction, dest, comp, jump); // split the c-instruction
     
+    // init binary instruction
+    unsigned short bin_c_instruction = 0; 
+    
+    // translate string instructions to binary instructions
+    unsigned short translated_comp_bits; 
+    unsigned short translated_dest_bits;
+    unsigned short translated_jump_bits;
+    symboltable_get(BinaryTable, comp, &translated_comp_bits);
+    symboltable_get(BinaryTable, dest, &translated_dest_bits);
+    symboltable_get(BinaryTable, jump, &translated_jump_bits);
+    
+    // split the c-instruction
+    split_C_instruction(c_instruction, dest, comp, jump); 
+    
+    // shift bits into one binary number
     SHIFTBITS_OPCODE_111(bin_c_instruction);
+    SHIFTBITS_COMPUTATION(bin_c_instruction, translated_comp_bits); // comp bits
+    SHIFTBITS_DEST(bin_c_instruction, translated_dest_bits); // dest bits
+    SHIFTBITS_JUMP(bin_c_instruction, translated_jump_bits); // jump bits
 
-    symboltable_get(BinaryTable, dest, );
+    for (int i = 15; i>=0; i--) {
+        putchar((bin_c_instruction & (1U << i)) ? '1' : '0');
+    }
+    putchar("\n");
 
     return (unsigned short)(8);
 }
