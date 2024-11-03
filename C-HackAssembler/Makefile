@@ -4,7 +4,7 @@ CFLAGS = -g -Wall -Wextra -Werror
 
 TARGET = a.out
 
-SOURCES = main.c ./SymbolTable/symbol_table.c ./C-instruction/c_instruction.c
+SOURCES = main.c ./SymbolTable/symbol_table.c ./C-instruction/c_instruction.c ./C-instruction/c_instruction_binarytable.c
 
 # Default rule
 all: $(TARGET)
