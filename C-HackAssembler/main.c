@@ -3,17 +3,9 @@
 #include <stdio.h>
 
 int main(void) {
-    symboltable_t *BinaryTable = binarytable_create();
+    symboltable_t *BinaryTable = create_C_instruction_table();
 
-    char* command1 = "MD=D+M;JMP\n";
-    printf("%s", command1);
-    unsigned short dec_c_instruction1 = C_instruction_to_bin(BinaryTable, command1);
-    printf("decimal: %d\n", dec_c_instruction1);
+    unsigned short dec_c_instruction = translate_C_instruction_bin(BinaryTable, "MD=D+M;JMP");
 
-    char* command2 = "D+M\n";
-    printf("%s", command2);
-    unsigned short dec_c_instruction2 = C_instruction_to_bin(BinaryTable, command2);
-    printf("decimal: %d\n", dec_c_instruction2);
-
-    symboltable_destroy(BinaryTable);
+    printf("decimal: %d", dec_c_instruction);
 }

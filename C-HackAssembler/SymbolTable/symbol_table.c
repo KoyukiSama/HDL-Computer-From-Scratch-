@@ -51,7 +51,7 @@ char symboltable_set(symboltable_t *SymbolTable, const char* symbol, unsigned sh
     bucket_t *currBucket = SymbolTable->BucketList[key];
 
     // go to furthest collission bucket, check if key already exists
-    while (currBucket) {
+    if (currBucket) {
         if (strcmp(currBucket->symbol, symbol) == 0) {
             currBucket->value = value;
             return -1;
