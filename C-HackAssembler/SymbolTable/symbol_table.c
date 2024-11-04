@@ -17,6 +17,34 @@ symboltable_t* symboltable_init(size_t initial_capacity) {
     return SymbolTable;
 }
 
+void symboltable_init_predefined_symbols(symboltable_t* SymbolTable) {
+    symboltable_set(SymbolTable, "R0", 0); // REGISTER 0
+    symboltable_set(SymbolTable, "R1", 1);
+    symboltable_set(SymbolTable, "R2", 2);
+    symboltable_set(SymbolTable, "R3", 3);
+    symboltable_set(SymbolTable, "R4", 4);
+    symboltable_set(SymbolTable, "R5", 5);
+    symboltable_set(SymbolTable, "R6", 6);
+    symboltable_set(SymbolTable, "R7", 7);
+    symboltable_set(SymbolTable, "R8", 8);
+    symboltable_set(SymbolTable, "R9", 9);
+    symboltable_set(SymbolTable, "R10", 10);
+    symboltable_set(SymbolTable, "R11", 11);
+    symboltable_set(SymbolTable, "R12", 12);
+    symboltable_set(SymbolTable, "R13", 13);
+    symboltable_set(SymbolTable, "R14", 14);
+    symboltable_set(SymbolTable, "R15", 15);
+    symboltable_set(SymbolTable, "SCREEN", 16384); // SCREEN
+    symboltable_set(SymbolTable, "KBD", 24576); // KEYBOARD
+    symboltable_set(SymbolTable, "SP", 0);
+    symboltable_set(SymbolTable, "LCL", 1);
+    symboltable_set(SymbolTable, "ARG", 2);
+    symboltable_set(SymbolTable, "THIS", 3);
+    symboltable_set(SymbolTable, "THAT", 4);
+
+    return;
+}
+
 void symboltable_destroy(symboltable_t *SymbolTable) {
 
     // check if null

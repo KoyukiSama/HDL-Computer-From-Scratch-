@@ -28,9 +28,17 @@ typedef struct symboltable {
  *  
  * @param initial_capacity, size_t
  * 
- * @returns symboltable
+ * @returns symboltable_t *
 */
 symboltable_t*  symboltable_init(size_t initial_capacity);
+
+/**
+ *  !initializes the predefined symbol table
+ * 
+ * @param SymbolTable, address of the symboltable
+ * 
+ */
+void symboltable_init_predefined_symbols(symboltable_t* SymbolTable);
 
 /**
  *  !destroy symboltable
