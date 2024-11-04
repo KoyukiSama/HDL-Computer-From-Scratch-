@@ -14,11 +14,11 @@ int main(void) {
 
     int condition = 0;
     char buffer[100];
+    int PC = 0; // set Program Counter to 0
 
     // first pass // remove white space, keep track of PC SYMBOLS
 
     while (condition != EOF) {
-        int PC = 0; // set Program Counter to 0
 
         // scan for word
         do {
@@ -38,7 +38,6 @@ int main(void) {
             // from (LOOP) to LOOP
             for (int i = 0; i<symbol_len; i++) {
                 symbol[i] = buffer[i+1];
-                i++;
             } symbol[symbol_len] = '\0';
 
             symboltable_set( SymbolTable, symbol, PC ); // add to symbol table
