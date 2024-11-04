@@ -48,8 +48,7 @@ void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char*
 void A_instruction_to_bin(char* a_instruction, char* a_instruction_binary_string);
 
 /**
- *  !translates the A OR C instruction to binary, the command will know 
- *  !if it's a variable, this part does not take care of it, you have to first preprocess the variable into it's number so from, @variable -> @16, so it only takes @numbers as A instructions.
+ *  !translates the A or C instruction to binary
  * 
  * @param BinaryTable, represents the predefined binary table that has to be created with C_binarytable_create();
  * @param instruction, represents instruction string
