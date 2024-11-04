@@ -4,12 +4,16 @@
 
 int main(void) {
     symboltable_t *BinaryTable = C_binarytable_create();
+    symboltable_t *SymbolTable = symboltable_init(100);
+    symboltable_init_predefined_symbols(SymbolTable);
 
-    char* instruction = "@34";
-    char binary_string[17];
-    instruction_to_bin(BinaryTable, instruction, binary_string);
+    // first pass // remove white space, keep track of PC SYMBOLS
 
-    printf("instruction: %s\nbinary_string: %s", instruction, binary_string);
+
+
+
+    // second pass
 
     symboltable_destroy(BinaryTable);
+    symboltable_destroy(SymbolTable);
 }
