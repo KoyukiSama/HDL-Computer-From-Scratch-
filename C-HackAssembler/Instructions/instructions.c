@@ -170,26 +170,34 @@ void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char*
     return;
 }
 
-void A_instruction_to_bin_string(char* a_instruction, char* a_instruction_binary_string) {
-    
-    unsigned short a_instruction_binary = 0;
-    a_instruction++; // will start after @
+void A_instruction_from_string_to_bin_string(char* a_instruction, char* a_instruction_binary_string) {
 
-    while (*a_instruction) {
-        a_instruction_binary = a_instruction_binary * 10 + *a_instruction - '0';
-        a_instruction++;
-    }
+    unsigned short a_instruction_unsig_short = 0;
 
-    A_instruction_to_bin_digits(a_instruction_binary, a_instruction_binary_string);
+    //translate string to unsigned short
+    A_instruction_from_string_to_unsig_short(a_instruction, a_instruction_unsig_short);
+
+    //translate unsigned short to binary string
+    A_instruction_from_unsig_short_to_bin_string(a_instruction_unsig_short, a_instruction_binary_string);
 
     return;
 }
 
+void A_instruction_from_string_to_unsig_short(char* a_instruction, unsigned short a_instruction_unsig_short) {
 
-void A_instruction_to_bin_digits(unsigned short a_instruction, char* a_instruction_binary_string) {
+    a_instruction_unsig_short = 0;
+    a_instruction++; // will start after @
+
+    while (*a_instruction) {
+        a_instruction_unsig_short = a_instruction_unsig_short * 10 + *a_instruction - '0';
+        a_instruction++;
+    }
+}
+
+void A_instruction_from_unsig_short_to_bin_string(unsigned short a_instruction_unsig_short, char* a_instruction_binary_string) {
 
     for (int i = 15, j = 0; i>=0; i--, j++) {
-        a_instruction_binary_string[j] = (a_instruction & (1U << i)) ? '1' : '0';
+        a_instruction_binary_string[j] = (a_instruction_unsig_short & (1U << i)) ? '1' : '0';
     }
 
     a_instruction_binary_string[16] = '\0';

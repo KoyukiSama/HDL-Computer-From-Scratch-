@@ -115,7 +115,6 @@ int main(void) {
 
         }
 
-
         fgetc(file_in); 
     }
 

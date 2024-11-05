@@ -45,12 +45,20 @@ void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char*
  * @param a_instruction, represents a_instruction string
  * @param a_instruction_binary_string, represents the a_instruction into a string of chars, that represents the binary display, not actual binary
  */
-void A_instruction_to_bin(char* a_instruction, char* a_instruction_binary_string);
+void A_instruction_from_string_to_bin_string(char* a_instruction, char* a_instruction_binary_string);
 
 /**
- *  !translates the A or C instruction to binary
+ *  !translates the A instruction string to unsigned short
+ * 
+ * @param a_instruction, represents a_instruction string, so with @ prefix
+ * @param a_instruction_unsig_short, represents the a_instruction unsigned short, so without @prefix and in number form
+ */
+void A_instruction_from_string_to_unsig_short(char* a_instruction, unsigned short a_instruction_unsig_short) {
+
+/**
+ *  !translates the A instruction unsigned short to a binary string
  * 
  * @param a_instruction, represents a_instruction unsigned short, so without @ prefix
  * @param a_instruction_binary_string, represents the instruction into a string of chars, which represents the binary display, not actual binary
  */
-void A_instruction_to_bin_digits(unsigned short a_instruction, char* a_instruction_binary_string) {
+void A_instruction_from_unsig_short_to_bin_string(unsigned short a_instruction, char* a_instruction_binary_string);
