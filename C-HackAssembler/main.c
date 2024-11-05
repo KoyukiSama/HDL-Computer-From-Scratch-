@@ -14,7 +14,6 @@ int main(void) {
 
     int condition = 0;
     char buffer[100];
-    //char wrongbuffer[100];
     int PC = 0; // set Program Counter to 0
 
     // first pass // remove white space, keep track of PC SYMBOLS
@@ -22,10 +21,11 @@ int main(void) {
     while (condition != EOF) {
         // scan for word
 
+        // delete white space, tabs, newlines, and comments
         do {
             condition = fscanf(file_in, " %99[^ \n\t/]", buffer);
             if (condition == EOF) {
-                exit(EXIT_SUCCESS);
+                break;
             }
             
             if (condition == 0) {
@@ -37,10 +37,12 @@ int main(void) {
         while (buffer[0] == '/') {
             condition = fscanf(file_in, " %[^\n]", buffer);
             if (condition == EOF) {
-                exit(EXIT_SUCCESS);
+                break;
             }
         }
-
+        if (condition == EOF) { // exit first pass
+            break;
+        }
 
         // if symbol is found, add to table
         if (buffer[0] == '(') {
@@ -85,11 +87,38 @@ int main(void) {
     fclose(file_out);
 
 
-    
-
-
-
     // second pass
+
+    FILE* file_out = fopen("out.asm", "rw");
+    if (file_out == NULL) { perror("error with opening file_out"); exit(EXIT_FAILURE); };
+
+    condition = 0;
+    while (condition != EOF) {
+        
+        condition = fscanf(file_in, "%[^\n]", buffer);
+        unsigned short value;
+        if (buffer[0] == '@') {
+
+            char symboltable_get_return = symboltable_get(SymbolTable, buffer, &value);
+
+            if (buffer[1] >= '0' && buffer[1] <= '0') { // if @1942
+
+            } 
+            else if (symboltable_get_return == 0) { // if var already in table
+                
+            } 
+            else { // if var not in table
+
+            }
+        }
+        else { // c-instruction stuff
+
+        }
+
+
+        fgetc(file_in); 
+    }
+
 
     symboltable_destroy(BinaryTable);
     symboltable_destroy(SymbolTable);

@@ -170,7 +170,7 @@ void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char*
     return;
 }
 
-void A_instruction_to_bin(char* a_instruction, char* a_instruction_binary_string) {
+void A_instruction_to_bin_string(char* a_instruction, char* a_instruction_binary_string) {
     
     unsigned short a_instruction_binary = 0;
     a_instruction++; // will start after @
@@ -180,21 +180,19 @@ void A_instruction_to_bin(char* a_instruction, char* a_instruction_binary_string
         a_instruction++;
     }
 
-    for (int i = 15, j = 0; i>=0; i--, j++) {
-        a_instruction_binary_string[j] = (a_instruction_binary & (1U << i)) ? '1' : '0';
-    }
-
-    a_instruction_binary_string[16] = '\0';
+    A_instruction_to_bin_digits(a_instruction_binary, a_instruction_binary_string);
 
     return;
 }
 
-void instruction_to_bin(symboltable_t* BinaryTable, char* instruction, char* instruction_binary_string) {
-    if (instruction[0] == '@') {
-        A_instruction_to_bin(instruction, instruction_binary_string);
-    } else {
-        C_instruction_to_bin(BinaryTable, instruction, instruction_binary_string);
+
+void A_instruction_to_bin_digits(unsigned short a_instruction, char* a_instruction_binary_string) {
+
+    for (int i = 15, j = 0; i>=0; i--, j++) {
+        a_instruction_binary_string[j] = (a_instruction & (1U << i)) ? '1' : '0';
     }
+
+    a_instruction_binary_string[16] = '\0';
 
     return;
 }

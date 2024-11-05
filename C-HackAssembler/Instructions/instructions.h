@@ -50,8 +50,7 @@ void A_instruction_to_bin(char* a_instruction, char* a_instruction_binary_string
 /**
  *  !translates the A or C instruction to binary
  * 
- * @param BinaryTable, represents the predefined binary table that has to be created with C_binarytable_create();
- * @param instruction, represents instruction string
- * @param instruction_binary_string, represents the instruction into a string of chars, that represents the binary display, not actual binary
+ * @param a_instruction, represents a_instruction unsigned short, so without @ prefix
+ * @param a_instruction_binary_string, represents the instruction into a string of chars, which represents the binary display, not actual binary
  */
-void instruction_to_bin(symboltable_t* BinaryTable, char* instruction, char* instruction_binary_string);
+void A_instruction_to_bin_digits(unsigned short a_instruction, char* a_instruction_binary_string) {
