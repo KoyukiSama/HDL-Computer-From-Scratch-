@@ -78,7 +78,7 @@ int main(void) {
             }
             out_buffer[j] = '\0';
 
-            //fprintf(file_out, "%s\n", out_buffer);
+            fprintf(file_out, "%s\n", out_buffer);
 
             fprintf(stderr, "here, %s\n", out_buffer);
             PC++;
