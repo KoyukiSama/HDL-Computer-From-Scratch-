@@ -5,7 +5,7 @@ symboltable_t* C_binarytable_create() {
     symboltable_t* BinaryTable = symboltable_init(36);
 
     // set comp instructions
-    symboltable_set(BinaryTable, "0", 21); // 0
+    symboltable_set(BinaryTable, "0", 42); // 0
     symboltable_set(BinaryTable, "1", 63); // 1
     symboltable_set(BinaryTable, "-1", 58); // -1
     symboltable_set(BinaryTable, "D", 12); // D
@@ -35,14 +35,14 @@ symboltable_t* C_binarytable_create() {
     symboltable_set(BinaryTable, "D|M", 85);
 
     // set dest instructions
-    symboltable_set(BinaryTable, "null", 0); // null
-    symboltable_set(BinaryTable, "M", 1); // M
-    symboltable_set(BinaryTable, "D", 2); // D
-    symboltable_set(BinaryTable, "MD", 3); // MD
-    symboltable_set(BinaryTable, "A", 4); // A
-    symboltable_set(BinaryTable, "AM", 5); // AM
-    symboltable_set(BinaryTable, "AD", 6); // AD
-    symboltable_set(BinaryTable, "AMD", 7); // AMD
+    symboltable_set(BinaryTable, "nulld", 0); // null
+    symboltable_set(BinaryTable, "Md", 1); // M
+    symboltable_set(BinaryTable, "Dd", 2); // D
+    symboltable_set(BinaryTable, "MDd", 3); // MD
+    symboltable_set(BinaryTable, "Ad", 4); // A
+    symboltable_set(BinaryTable, "AMd", 5); // AM
+    symboltable_set(BinaryTable, "ADd", 6); // AD
+    symboltable_set(BinaryTable, "AMDd", 7); // AMD
 
     // set jump instructions
     symboltable_set(BinaryTable, "null", 0); // null
@@ -137,7 +137,7 @@ void C_instruction_split(char* c_instruction, char* dest, char* comp, char* jump
 
 void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char* c_instruction_binary_string) {
     
-    char dest[5] = {0};
+    char dest[6] = {0};
     char comp[5] = {0};
     char jump[5] = {0};
     
@@ -148,6 +148,14 @@ void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char*
     C_instruction_split(c_instruction, dest, comp, jump); 
     // printf("dest: %s\ncomp: %s\njump: %s\n", dest, comp, jump); // debug statement
 
+    // change dest field to account for not clashing with comp
+    int string_count = 0;
+    while (dest[string_count] != '\0') {
+        string_count++;
+    }
+    dest[string_count] = 'd';
+    dest[string_count + 1] = '\0';
+
     // translate string instructions to binary instructions
     unsigned short translated_bits_comp; 
     unsigned short translated_bits_dest;
@@ -155,6 +163,7 @@ void C_instruction_to_bin(symboltable_t* BinaryTable, char* c_instruction, char*
     symboltable_get(BinaryTable, comp, &translated_bits_comp);
     symboltable_get(BinaryTable, dest, &translated_bits_dest);
     symboltable_get(BinaryTable, jump, &translated_bits_jump);
+
     
     // shift bits into one binary number
     c_instruction_binary = SHIFTBITS_OPCODE_111(c_instruction_binary);

@@ -102,26 +102,22 @@ int main(void) {
         if (condition == EOF) {
             break;
         }
-                                                        printf("%s", buffer);
         unsigned short value = 0;
         if (buffer[0] == '@') { // A_instruction
 
             char symboltable_get_return = symboltable_get(SymbolTable, buffer, &value);
-            printf("%d", symboltable_get_return);
             char a_instruction_binary_string[17] = {0};
 
             if (buffer[1] >= '0' && buffer[1] <= '9') { // if @1942 ex, to binary form
 
                 A_instruction_from_string_to_bin_string(buffer, a_instruction_binary_string);
                 fprintf(file_out2, "%s\n", a_instruction_binary_string);
-                printf(" :      %s : I went in 0 - 9\n", a_instruction_binary_string);
 
             }
             else if (symboltable_get_return == 0) { // if var already in table, 41849 ex
                 
                 A_instruction_from_unsig_short_to_bin_string(value, a_instruction_binary_string);
                 fprintf(file_out2, "%s\n", a_instruction_binary_string);
-                printf(" :      %s : I went in symbol table found\n", a_instruction_binary_string);
 
             }
             else { // if var not in table @var ex
@@ -129,7 +125,6 @@ int main(void) {
                 symboltable_set(SymbolTable, buffer, ram_count);
                 A_instruction_from_unsig_short_to_bin_string(ram_count, a_instruction_binary_string);
                 fprintf(file_out2, "%s\n", a_instruction_binary_string);
-                printf(" :      %s : I went in symbol table not found\n", a_instruction_binary_string);
 
                 ram_count++;
             }
@@ -139,7 +134,6 @@ int main(void) {
             char c_instruction_binary_string[17] = {0};
             C_instruction_to_bin(BinaryTable, buffer, c_instruction_binary_string);
             fprintf(file_out2, "%s\n", c_instruction_binary_string);
-            printf(" :      %s : I went in c instruct\n", c_instruction_binary_string);
 
         }
 
