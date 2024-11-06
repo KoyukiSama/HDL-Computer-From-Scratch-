@@ -80,16 +80,12 @@ int main(void) {
 
             fprintf(file_out, "%s\n", out_buffer);
 
-            fprintf(stderr, "here, %s\n", out_buffer);
             PC++;
         }
 
     }
-    fprintf(stderr, "before fclose\n");
     fclose(file_in);
-    fprintf(stderr, "after fclose file in\n");
     fclose(file_out);
-    fprintf(stderr, "after fclose\n");
 
     // second pass
 
