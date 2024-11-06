@@ -77,7 +77,6 @@ int main(void) {
             out_buffer[j] = '\0';
 
             fprintf(file_out, "%s\n", out_buffer);
-            printf("%s\n", out_buffer);
             PC++;
         }
 
@@ -89,30 +88,39 @@ int main(void) {
 
     // second pass
 
-    FILE* file_out2 = fopen("out.asm", "r+");
-    if (file_out2 == NULL) { perror("error with opening file_out"); exit(EXIT_FAILURE); };
+    FILE* file_out2 = fopen("out2.asm", "w");
+    if (file_out2 == NULL) { perror("error with opening file_out2"); exit(EXIT_FAILURE); };
+    FILE* file_out_read = fopen("out.asm", "r");
+    if (file_out_read == NULL) { perror("error with opening file_out"); exit(EXIT_FAILURE); };
 
     condition = 0;
     unsigned short ram_count = 16; // 16 is first assigned ram
     while (condition != EOF) {
         
-        condition = fscanf(file_out2, "%[^\n]", buffer);
-        unsigned short value;
+        condition = fscanf(file_out_read, "%[^\n]", buffer);
+        if (condition == EOF) {
+            break;
+        }
+                                                        printf("%s", buffer);
+        unsigned short value = 0;
         if (buffer[0] == '@') { // A_instruction
 
             char symboltable_get_return = symboltable_get(SymbolTable, buffer, &value);
+            printf("%d", symboltable_get_return);
             char a_instruction_binary_string[17] = {0};
 
             if (buffer[1] >= '0' && buffer[1] <= '9') { // if @1942 ex, to binary form
 
                 A_instruction_from_string_to_bin_string(buffer, a_instruction_binary_string);
                 fprintf(file_out2, "%s\n", a_instruction_binary_string);
+                printf(" :      %s : I went in 0 - 9\n", a_instruction_binary_string);
 
             }
             else if (symboltable_get_return == 0) { // if var already in table, 41849 ex
                 
                 A_instruction_from_unsig_short_to_bin_string(value, a_instruction_binary_string);
                 fprintf(file_out2, "%s\n", a_instruction_binary_string);
+                printf(" :      %s : I went in symbol table found\n", a_instruction_binary_string);
 
             }
             else { // if var not in table @var ex
@@ -120,6 +128,7 @@ int main(void) {
                 symboltable_set(SymbolTable, buffer, ram_count);
                 A_instruction_from_unsig_short_to_bin_string(ram_count, a_instruction_binary_string);
                 fprintf(file_out2, "%s\n", a_instruction_binary_string);
+                printf(" :      %s : I went in symbol table not found\n", a_instruction_binary_string);
 
                 ram_count++;
             }
@@ -129,16 +138,18 @@ int main(void) {
             char c_instruction_binary_string[17] = {0};
             C_instruction_to_bin(BinaryTable, buffer, c_instruction_binary_string);
             fprintf(file_out2, "%s\n", c_instruction_binary_string);
+            printf(" :      %s : I went in c instruct\n", c_instruction_binary_string);
 
         }
 
-        char ch = fgetc(file_out2);
+        char ch = fgetc(file_out_read);
         if (ch == EOF) { break; }
     }
 
     symboltable_destroy(BinaryTable);
     symboltable_destroy(SymbolTable);
     fclose(file_out2);
+    fclose(file_out_read);
 
     return 0;
 }
