@@ -89,14 +89,14 @@ int main(void) {
 
     // second pass
 
-    FILE* file_out2 = fopen("out.asm", "w+");
+    FILE* file_out2 = fopen("out.asm", "r+");
     if (file_out2 == NULL) { perror("error with opening file_out"); exit(EXIT_FAILURE); };
 
     condition = 0;
     unsigned short ram_count = 16; // 16 is first assigned ram
     while (condition != EOF) {
         
-        condition = fscanf(file_in, "%[^\n]", buffer);
+        condition = fscanf(file_out2, "%[^\n]", buffer);
         unsigned short value;
         if (buffer[0] == '@') { // A_instruction
 
@@ -132,7 +132,8 @@ int main(void) {
 
         }
 
-        fgetc(file_out2); 
+        char ch = fgetc(file_out2);
+        if (ch == EOF) { break; }
     }
 
     symboltable_destroy(BinaryTable);

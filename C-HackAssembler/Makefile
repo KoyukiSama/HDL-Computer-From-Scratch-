@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -g -Wall -Wextra
+CFLAGS = -g -Wall -Wextra -Werror
 
 TARGET = a.out
 
