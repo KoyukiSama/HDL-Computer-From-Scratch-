@@ -175,7 +175,7 @@ void A_instruction_from_string_to_bin_string(char* a_instruction, char* a_instru
     unsigned short a_instruction_unsig_short = 0;
 
     //translate string to unsigned short
-    A_instruction_from_string_to_unsig_short(a_instruction, a_instruction_unsig_short);
+    A_instruction_from_string_to_unsig_short(a_instruction, &a_instruction_unsig_short);
 
     //translate unsigned short to binary string
     A_instruction_from_unsig_short_to_bin_string(a_instruction_unsig_short, a_instruction_binary_string);
@@ -183,15 +183,17 @@ void A_instruction_from_string_to_bin_string(char* a_instruction, char* a_instru
     return;
 }
 
-void A_instruction_from_string_to_unsig_short(char* a_instruction, unsigned short a_instruction_unsig_short) {
+void A_instruction_from_string_to_unsig_short(char* a_instruction, unsigned short* a_instruction_unsig_short) {
 
-    a_instruction_unsig_short = 0;
+    (*a_instruction_unsig_short) = 0;
     a_instruction++; // will start after @
 
     while (*a_instruction) {
-        a_instruction_unsig_short = a_instruction_unsig_short * 10 + *a_instruction - '0';
+        (*a_instruction_unsig_short) = (*a_instruction_unsig_short) * 10 + *a_instruction - '0';
         a_instruction++;
     }
+
+    return;
 }
 
 void A_instruction_from_unsig_short_to_bin_string(unsigned short a_instruction_unsig_short, char* a_instruction_binary_string) {

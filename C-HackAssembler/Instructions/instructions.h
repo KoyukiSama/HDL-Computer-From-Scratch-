@@ -53,7 +53,7 @@ void A_instruction_from_string_to_bin_string(char* a_instruction, char* a_instru
  * @param a_instruction, represents a_instruction string, so with @ prefix
  * @param a_instruction_unsig_short, represents the a_instruction unsigned short, so without @prefix and in number form
  */
-void A_instruction_from_string_to_unsig_short(char* a_instruction, unsigned short a_instruction_unsig_short) {
+void A_instruction_from_string_to_unsig_short(char* a_instruction, unsigned short* a_instruction_unsig_short) {
 
 /**
  *  !translates the A instruction unsigned short to a binary string
@@ -61,4 +61,4 @@ void A_instruction_from_string_to_unsig_short(char* a_instruction, unsigned shor
  * @param a_instruction, represents a_instruction unsigned short, so without @ prefix
  * @param a_instruction_binary_string, represents the instruction into a string of chars, which represents the binary display, not actual binary
  */
-void A_instruction_from_unsig_short_to_bin_string(unsigned short a_instruction, char* a_instruction_binary_string);
+void A_instruction_from_unsig_short_to_bin_string(unsigned short a_instruction_unsig_short, char* a_instruction_binary_string);
