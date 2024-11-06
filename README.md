@@ -35,4 +35,21 @@ The Ram and CPU
 
 ### Hack Assembler in C
 
-SoonTM
+- main.c has 2 steps, 
+    first it gets rid of all the garbage and cleans it up nicely, preprocessing
+    secondly it translates all the instructions to binary code.
+
+- Instruction/
+    this directory has the library that I made,
+    it has the code for the translation logic.
+
+- SymbolTable/
+    this directory has the hashmap library that I made,
+    it has the code for hashmap logic
+
+
+### Known issues
+
+sadly there was an error that I could not fix with huge files,
+the error has something to do with fclose not working properly.
+
