@@ -7,6 +7,7 @@ int main(void) {
     symboltable_t *SymbolTable = symboltable_init(100);
     symboltable_init_predefined_symbols(SymbolTable);
     
+    
     FILE* file_in = fopen("in.asm", "r");
     if (file_in == NULL) { perror("error with opening file_in"); exit(EXIT_FAILURE); };
     FILE* file_out = fopen("out.asm", "w");
@@ -78,14 +79,16 @@ int main(void) {
             out_buffer[j] = '\0';
 
             fprintf(file_out, "%s\n", out_buffer);
+
+            fprintf(stderr, "here, %s\n", out_buffer);
             PC++;
         }
 
     }
-
+    fprintf(stderr, "before fclose\n");
     fclose(file_in);
     fclose(file_out);
-
+    fprintf(stderr, "after fclose\n");
 
     // second pass
 
