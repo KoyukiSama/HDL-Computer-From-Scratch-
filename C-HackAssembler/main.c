@@ -14,7 +14,7 @@ int main(void) {
     if (file_out == NULL) { perror("error with opening file_out"); exit(EXIT_FAILURE); };
 
     int condition = 0;
-    char buffer[100];
+    char buffer[100] = {0};
     int PC = 0; // set Program Counter to 0
 
     // first pass // remove white space, keep track of PC SYMBOLS
@@ -52,7 +52,7 @@ int main(void) {
             while (buffer[symbol_len] != ')') {
                 symbol_len++;
             }
-            char* symbol = malloc(symbol_len);
+            char* symbol = malloc(symbol_len+1);
             if (symbol == NULL) { perror("error with symbol malloc"); exit(EXIT_FAILURE); }
 
             // from (LOOP) to LOOP
@@ -78,7 +78,7 @@ int main(void) {
             }
             out_buffer[j] = '\0';
 
-            fprintf(file_out, "%s\n", out_buffer);
+            //fprintf(file_out, "%s\n", out_buffer);
 
             fprintf(stderr, "here, %s\n", out_buffer);
             PC++;
@@ -87,6 +87,7 @@ int main(void) {
     }
     fprintf(stderr, "before fclose\n");
     fclose(file_in);
+    fprintf(stderr, "after fclose file in\n");
     fclose(file_out);
     fprintf(stderr, "after fclose\n");
 
