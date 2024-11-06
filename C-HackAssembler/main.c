@@ -55,8 +55,9 @@ int main(void) {
             if (symbol == NULL) { perror("error with symbol malloc"); exit(EXIT_FAILURE); }
 
             // from (LOOP) to LOOP
+            symbol[0] = '@';
             for (int i = 0; i<symbol_len-1; i++) {
-                symbol[i] = buffer[i+1];
+                symbol[i+1] = buffer[i+1];
             } symbol[symbol_len] = '\0';
 
             symboltable_set( SymbolTable, symbol, PC ); // add to symbol table
